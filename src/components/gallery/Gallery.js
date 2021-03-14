@@ -8,6 +8,8 @@ import { Carousel } from 'react-responsive-carousel';
 
 import './Gallery.css';
 
+import test from '../../resources/wood-background.jpg';
+
 class Gallery extends Component {
   state = { width: 0 }
 
@@ -26,15 +28,14 @@ class Gallery extends Component {
         <Container text className="body-container">
           <div className="header-text">
             <Header as='h1' className="white">Gallery</Header>
-            <p className="gallery-sub">Before & After</p>
           </div>
 
         <Carousel className="gallery-carousel" autoPlay centerMode={width > 700} centerSlidePercentage={50} emulateTouch showThumbs={false}>
               <div>
-                  <img src={require('../../resources/wood-background.jpg')} alt='before1' />
-                  <p className="legend">Before</p>
+                  <img src={test} alt='before1' />
+                  <p className="legend">Test</p>
               </div>
-          </Carousel>
+        </Carousel>
         </Container>
       </div>
     );
