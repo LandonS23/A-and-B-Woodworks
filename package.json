@@ -1,8 +1,8 @@
 {
   "name": "a-and-b-woodworks",
   "version": "0.0.1",
-  "description": "A website for A and B Woodworks",
-  "productName": "A and B Woodworks",
+  "description": "If you can draw it, we can saw it!",
+  "productName": "A & B Woodworks",
   "author": "Landon Sherwood <landonsherwood23@gmail.com>",
   "private": true,
   "scripts": {

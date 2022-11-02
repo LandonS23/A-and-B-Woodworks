@@ -1,42 +1,77 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hHh lpR fff">
     <q-header elevated>
       <q-toolbar>
         <q-btn
+          v-if="screen.xs"
           flat
-          dense
           round
+          dense
           icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
+          @click="drawer = !drawer"
         />
 
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
+        <q-btn to="/" :aria-label="t('company')" class="watson" flat dense>
+          <!-- Note: v-html is not recommended for use, however used to keep text in i18n -->
+          <span v-html="t('companyMultiline')" />
+        </q-btn>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <q-space />
+
+        <q-tabs v-if="screen.gt.xs" inline-label shrink stretch>
+          <q-route-tab
+            v-for="(menuItem, index) in menuList"
+            :key="menuItem.label + index"
+            :icon="menuItem.icon"
+            :label="menuItem.label"
+            :to="menuItem.path"
+          />
+        </q-tabs>
+
+        <q-space v-if="screen.gt.xs" />
+
+        <q-btn v-if="screen.gt.xs" to="/contact" outline>
+          <q-icon name="mail" left />
+          {{ t('contact') }}
+        </q-btn>
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
+    <q-drawer v-model="drawer" :width="200" bordered class="bg-grey-3">
+      <q-scroll-area class="fit">
+        <q-list padding class="menu-list">
+          <template
+            v-for="(menuItem, index) in menuList"
+            :key="menuItem.label + index"
+          >
+            <q-item
+              clickable
+              :active="menuItem.path === currentPath"
+              v-ripple
+              :to="menuItem.path"
+            >
+              <q-item-section avatar>
+                <q-icon :name="menuItem.icon" />
+              </q-item-section>
+              <q-item-section>
+                {{ menuItem.label }}
+              </q-item-section>
+            </q-item>
+          </template>
 
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
+          <q-item
+            clickable
+            :active="'/contact' === currentPath"
+            v-ripple
+            to="/contact"
+          >
+            <q-item-section avatar>
+              <q-icon name="mail" />
+            </q-item-section>
+            <q-item-section>{{ t('contact') }}</q-item-section>
+          </q-item>
+        </q-list>
+      </q-scroll-area>
     </q-drawer>
 
     <q-page-container>
@@ -46,71 +81,60 @@
 </template>
 
 <script lang="ts">
+import { useQuasar } from 'quasar';
 import { defineComponent, ref } from 'vue';
-import EssentialLink from 'components/EssentialLink.vue';
-
-const linksList = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-];
+import { useI18n } from 'vue-i18n';
+import { useRoute } from 'vue-router';
 
 export default defineComponent({
   name: 'MainLayout',
 
-  components: {
-    EssentialLink
-  },
+  components: {},
 
-  setup () {
-    const leftDrawerOpen = ref(false)
+  setup() {
+    const { t } = useI18n();
+    const quasar = useQuasar();
+    const screen = ref(quasar.screen);
+    const drawer = ref(false);
+    const route = useRoute();
+    const currentPath = ref(route.path);
+
+    const menuList = [
+      {
+        icon: 'home',
+        label: 'Home',
+        path: '/',
+      },
+      {
+        icon: 'info',
+        label: 'About',
+        path: '/about',
+      },
+      {
+        icon: 'photo',
+        label: 'Gallery',
+        path: '/gallery',
+      },
+      {
+        icon: 'question_mark',
+        label: 'FAQ',
+        path: '/faq',
+      },
+    ];
 
     return {
-      essentialLinks: linksList,
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
-    }
-  }
+      t,
+      screen,
+      drawer,
+      currentPath,
+      menuList,
+    };
+  },
 });
 </script>
+
+<style lang="scss" scoped>
+.menu-list .q-item {
+  border-radius: 0 32px 32px 0;
+}
+</style>
