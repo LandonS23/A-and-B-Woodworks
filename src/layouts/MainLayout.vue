@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh lpR fff">
     <q-header elevated>
-      <q-toolbar>
+      <q-toolbar class="bg-primary text-white glossy">
         <q-btn
           v-if="screen.xs"
           flat
@@ -77,6 +77,13 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+
+    <q-footer flat class="footer-bg-color q-py-md">
+      <div class="text-caption text-center">
+        Copyright &copy; {{ new Date().getFullYear() }}, {{ t('company') }}. All
+        Rights Reserved.
+      </div>
+    </q-footer>
   </q-layout>
 </template>
 
@@ -88,8 +95,6 @@ import { useRoute } from 'vue-router';
 
 export default defineComponent({
   name: 'MainLayout',
-
-  components: {},
 
   setup() {
     const { t } = useI18n();
@@ -111,7 +116,7 @@ export default defineComponent({
         path: '/about',
       },
       {
-        icon: 'photo',
+        icon: 'collections',
         label: 'Gallery',
         path: '/gallery',
       },
@@ -136,5 +141,16 @@ export default defineComponent({
 <style lang="scss" scoped>
 .menu-list .q-item {
   border-radius: 0 32px 32px 0;
+}
+
+.q-page-container {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('../assets/wood-background.jpeg') no-repeat 0 0;
+  background-size: cover;
+}
+
+.footer-bg-color {
+  background: none;
+  color: #fff;
 }
 </style>
