@@ -7,10 +7,10 @@
       }"
     >
       <div
-        class="text-center text-white q-px-md watson"
+        class="text-center text-white q-px-md q-mt-lg watson"
         :class="{
-          'text-h2 q-mb-md q-mt-xl': screen.gt.xs,
-          'text-h4 q-mb-sm q-mt-lg': screen.xs,
+          'text-h2 q-mb-md': screen.gt.xs,
+          'text-h4 q-mb-sm': screen.xs,
         }"
       >
         {{ t('company') }}
