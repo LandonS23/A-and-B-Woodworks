@@ -1,4 +1,4 @@
-# A and B Woodworks (a-and-b-woodworks)
+# A & B Woodworks (a-and-b-woodworks)
 
 A website for A and B Woodworks
 
