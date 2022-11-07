@@ -24,47 +24,58 @@
       >
         {{ t('lineOfWork') }}
       </div>
-      <div
-        class="text-white text-bold q-mx-md q-mx-md-xl q-mt-lg"
-        :class="{
-          'text-h4': screen.gt.xs,
-          'text-h5': screen.xs,
-        }"
-      >
-        {{ t('q1') }}
+      <div class="row q-col-gutter-lg q-mx-md q-mx-md-auto faq">
+        <div class="col-12 col-md-6">
+          <div
+            class="text-white text-bold q-mx-md q-mx-md-xl q-mt-lg"
+            :class="{
+              'text-h4': screen.gt.xs,
+              'text-h5': screen.xs,
+            }"
+          >
+            {{ t('q1') }}
+          </div>
+
+          <q-list dense class="text-white q-mx-md q-mx-md-xl q-mt-md">
+            <q-item
+              v-for="(answer, index) in q1Answers"
+              :key="`q1-answer${index}`"
+            >
+              <q-item-section avatar>
+                <q-icon color="white" name="radio_button_checked" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label class="text-body1">{{ answer }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </div>
+        <div class="col-12 col-md-6">
+          <div
+            class="text-white text-bold q-mx-md q-mx-md-xl q-mt-lg"
+            :class="{
+              'text-h4': screen.gt.xs,
+              'text-h5': screen.xs,
+            }"
+          >
+            {{ t('q2') }}
+          </div>
+
+          <q-list dense class="text-white q-mx-md q-mx-md-xl q-mt-md">
+            <q-item
+              v-for="(answer, index) in q2Answers"
+              :key="`q2-answer${index}`"
+            >
+              <q-item-section avatar>
+                <q-icon color="white" name="radio_button_checked" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label class="text-body1">{{ answer }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </div>
       </div>
-
-      <q-list dense class="text-white q-mx-md q-mx-md-xl q-mt-md">
-        <q-item v-for="(answer, index) in q1Answers" :key="`q1-answer${index}`">
-          <q-item-section avatar>
-            <q-icon color="white" name="radio_button_checked" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label class="text-body1">{{ answer }}</q-item-label>
-          </q-item-section>
-        </q-item>
-      </q-list>
-
-      <div
-        class="text-white text-bold q-mx-md q-mx-md-xl q-mt-lg"
-        :class="{
-          'text-h4': screen.gt.xs,
-          'text-h5': screen.xs,
-        }"
-      >
-        {{ t('q2') }}
-      </div>
-
-      <q-list dense class="text-white q-mx-md q-mx-md-xl q-mt-md">
-        <q-item v-for="(answer, index) in q2Answers" :key="`q2-answer${index}`">
-          <q-item-section avatar>
-            <q-icon color="white" name="radio_button_checked" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label class="text-body1">{{ answer }}</q-item-label>
-          </q-item-section>
-        </q-item>
-      </q-list>
     </div>
   </q-page>
 </template>
@@ -103,4 +114,8 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.faq {
+  max-width: 1450px;
+}
+</style>

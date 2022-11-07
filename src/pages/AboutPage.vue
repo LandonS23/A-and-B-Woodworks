@@ -38,7 +38,7 @@
         {{ t('saying') }}
       </div>
 
-      <div class="text-center text-white text-body1 q-mx-md q-mx-md-xl">
+      <div class="text-center text-white text-body1 q-mx-md q-mx-md-auto about">
         {{ t('about') }}
       </div>
     </div>
@@ -72,5 +72,9 @@ export default defineComponent({
   @media (min-width: $breakpoint-md-min) {
     height: 250px;
   }
+}
+
+.about {
+  max-width: 900px;
 }
 </style>

@@ -25,6 +25,7 @@
             :icon="menuItem.icon"
             :label="menuItem.label"
             :to="menuItem.path"
+            exact
           />
         </q-tabs>
 
@@ -46,7 +47,7 @@
           >
             <q-item
               clickable
-              :active="menuItem.path === currentPath"
+              :active="menuItem.path === route.path"
               v-ripple
               :to="menuItem.path"
             >
@@ -61,7 +62,7 @@
 
           <q-item
             clickable
-            :active="'/contact' === currentPath"
+            :active="'/contact' === route.path"
             v-ripple
             to="/contact"
           >
@@ -102,7 +103,6 @@ export default defineComponent({
     const screen = ref(quasar.screen);
     const drawer = ref(false);
     const route = useRoute();
-    const currentPath = ref(route.path);
 
     const menuList = [
       {
@@ -131,7 +131,7 @@ export default defineComponent({
       t,
       screen,
       drawer,
-      currentPath,
+      route,
       menuList,
     };
   },
